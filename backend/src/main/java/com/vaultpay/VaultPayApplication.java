@@ -1,13 +1,13 @@
-package com.teste.vaultpay;
+package com.vaultpay;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class VaultPayApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(VaultPayApplication.class, args);
 	}
 
 }
