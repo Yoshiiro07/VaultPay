@@ -7,8 +7,8 @@ import java.util.UUID;
 public interface CustomerRepository {
     Customer save(Customer customer);
     Optional<Customer> findById(UUID id);
+    Optional<Customer> findByCpfCnpj(String cpfCnpj);
     Optional<Customer> findByEmail(String email);
-    Optional<Customer> findByPhoneNumber(String phoneNumber);
     boolean existsByCpfCnpj(String cpfCnpj);
     boolean existsByEmail(String email);
 }
