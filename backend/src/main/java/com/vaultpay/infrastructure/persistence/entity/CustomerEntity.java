@@ -11,6 +11,7 @@ import java.util.UUID;
 public class CustomerEntity {
     
     @Id
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @Column(nullable = false, length = 150)

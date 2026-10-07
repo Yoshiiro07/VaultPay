@@ -13,9 +13,12 @@ import java.util.UUID;
 public class TransactionEntity {
     
     @Id
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID sourceAccountId;
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID targetAccountId;
 
     @Column(nullable = false, precision = 19, scale = 2)

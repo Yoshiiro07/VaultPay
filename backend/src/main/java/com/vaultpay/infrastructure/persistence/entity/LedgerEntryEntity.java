@@ -12,12 +12,15 @@ import java.util.UUID;
 public class LedgerEntryEntity {
 
     @Id
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @Column(nullable = false)
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID transactionId;
 
     @Column(nullable = false)
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID accountId;
 
     @Enumerated(EnumType.STRING)

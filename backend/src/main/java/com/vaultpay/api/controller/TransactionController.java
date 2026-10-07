@@ -4,6 +4,9 @@ import com.vaultpay.api.dto.TransactionResponseDto;
 import com.vaultpay.api.dto.TransferRequestDto;
 import com.vaultpay.domain.model.Transaction;
 import com.vaultpay.domain.service.TransferService;
+
+import jakarta.transaction.Transactional;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +21,7 @@ public class TransactionController {
     }
 
     @PostMapping("/transfer")
+    @Transactional
     public ResponseEntity<TransactionResponseDto> transfer(@RequestBody TransferRequestDto request) {
         Transaction transaction = transferService.execute(
                 request.getSourceAccountId(),

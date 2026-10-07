@@ -13,6 +13,7 @@ import java.util.UUID;
 public class AccountEntity {
     
     @Id
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     private UUID id;
 
     @Column(nullable = false, unique = true, length = 20)
@@ -35,6 +36,7 @@ public class AccountEntity {
     @Column(nullable = false)
     private AccountStatus status;
 
+    @org.hibernate.annotations.JdbcTypeCode(java.sql.Types.VARCHAR)
     @Column(nullable = false)
     private UUID customerId;
 
