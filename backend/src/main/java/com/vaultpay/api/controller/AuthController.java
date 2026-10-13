@@ -1,0 +1,44 @@
+package com.vaultpay.api.controller;
+
+import com.vaultpay.api.dto.LoginRequestDto;
+import com.vaultpay.api.dto.LoginResponseDto;
+import com.vaultpay.domain.model.Customer;
+import com.vaultpay.domain.repository.CustomerRepository;
+import com.vaultpay.domain.service.security.PasswordEncoderPort;
+import com.vaultpay.domain.service.security.TokenService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/v1/auth")
+public class AuthController {
+
+    private final CustomerRepository customerRepository;
+    private final TokenService tokenService;
+    private final PasswordEncoderPort passwordEncoder;
+
+    public AuthController(CustomerRepository customerRepository, TokenService tokenService,
+            PasswordEncoderPort passwordEncoder) {
+        this.customerRepository = customerRepository;
+        this.tokenService = tokenService;
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto request) {
+        Customer customer = customerRepository.findByEmail(request.email())
+                .orElseThrow(() -> new IllegalArgumentException("Credenciais inválidas."));
+
+        System.out.println(">>> SENHA RECEBIDA: " + request.password());
+        System.out.println(">>> HASH NO DOMÍNIO: " + customer.getPasswordHash());
+
+        if (!passwordEncoder.matches(request.password(), customer.getPasswordHash())) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String token = tokenService.generateToken(customer.getId(), customer.getEmail());
+        return ResponseEntity.ok(LoginResponseDto.bearer(token, 86400));
+    }
+}
