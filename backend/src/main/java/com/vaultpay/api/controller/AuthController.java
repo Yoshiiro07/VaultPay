@@ -9,6 +9,7 @@ import com.vaultpay.domain.service.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,9 +31,6 @@ public class AuthController {
     public ResponseEntity<LoginResponseDto> login(@Valid @RequestBody LoginRequestDto request) {
         Customer customer = customerRepository.findByEmail(request.email())
                 .orElseThrow(() -> new IllegalArgumentException("Credenciais inválidas."));
-
-        System.out.println(">>> SENHA RECEBIDA: " + request.password());
-        System.out.println(">>> HASH NO DOMÍNIO: " + customer.getPasswordHash());
 
         if (!passwordEncoder.matches(request.password(), customer.getPasswordHash())) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
