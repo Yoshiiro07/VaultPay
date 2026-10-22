@@ -3,6 +3,7 @@ package com.vaultpay.infrastructure.config;
 import com.vaultpay.domain.repository.AccountRepository;
 import com.vaultpay.domain.repository.LedgerEntryRepository;
 import com.vaultpay.domain.repository.TransactionRepository;
+import com.vaultpay.domain.ports.TransactionPublisherPort;
 import com.vaultpay.domain.service.AccountService;
 import com.vaultpay.domain.service.TransferService;
 import org.springframework.context.annotation.Bean;
@@ -15,9 +16,10 @@ public class DomainServiceConfig {
     public TransferService transferService(
             AccountRepository accountRepository,
             TransactionRepository transactionRepository,
-            LedgerEntryRepository ledgerEntryRepository
+            LedgerEntryRepository ledgerEntryRepository,
+            TransactionPublisherPort transactionPublisherPort
     ) {
-        return new TransferService(accountRepository, transactionRepository, ledgerEntryRepository);
+        return new TransferService(accountRepository, transactionRepository, ledgerEntryRepository,transactionPublisherPort);
     }
 
     @Bean
