@@ -21,7 +21,7 @@ export class AuthService {
     return !!localStorage.getItem(this.TOKEN_KEY);
   }
 
-  login(credentials: { email: string; passwordHash: string }) {
+  login(credentials: { email: string; passwordHash: string; }, password: any) {
     return this.http.post<{ token: string }>(`${this.apiUrl}/login`, credentials).pipe(
       tap(response => {
         localStorage.setItem(this.TOKEN_KEY, response.token);
