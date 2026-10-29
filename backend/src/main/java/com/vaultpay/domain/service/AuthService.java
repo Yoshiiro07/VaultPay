@@ -63,13 +63,13 @@ public class AuthService {
                 BigDecimal.ZERO,
                 BigDecimal.valueOf(500.00), // Limite de crédito
                 AccountStatus.ACTIVE,
-                savedCustomer.getId(),
+                savedCustomer.getcustomer_id(),
                 LocalDateTime.now(),
                 null);
         Account savedAccount = accountRepository.save(account);
 
         return new RegisterResponseDto(
-                savedCustomer.getId(),
+                savedCustomer.getcustomer_id(),
                 savedCustomer.getFullName(),
                 savedCustomer.getEmail(),
                 savedAccount.getId(),

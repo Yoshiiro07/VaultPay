@@ -3,12 +3,24 @@ package com.vaultpay.domain.model;
 import com.vaultpay.domain.enums.TransactionStatus;
 import com.vaultpay.domain.enums.TransactionType;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+@Entity
+@Table(name = "transaction")
 public class Transaction {
+
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+    
     private UUID sourceAccountId;
     private UUID targetAccountId;
     private BigDecimal amount;

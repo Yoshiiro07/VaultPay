@@ -26,8 +26,8 @@ public class CustomerRepositoryAdapter implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> findById(UUID id) {
-        return springDataRepository.findById(id).map(this::toDomain);
+    public Optional<Customer> findById(UUID customer_id) {
+        return springDataRepository.findById(customer_id).map(this::toDomain);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class CustomerRepositoryAdapter implements CustomerRepository {
 
     private CustomerEntity toEntity(Customer domain) {
         return new CustomerEntity(
-                domain.getId(),
+                domain.getcustomer_id(),
                 domain.getFullName(),
                 domain.getCpfCnpj(),
                 domain.getEmail(),

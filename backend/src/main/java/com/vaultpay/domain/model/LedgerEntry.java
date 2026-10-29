@@ -6,8 +6,20 @@ import java.util.UUID;
 
 import com.vaultpay.domain.enums.LedgerEntryType;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "ledger_entries")
 public class LedgerEntry {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+
     private UUID transactionId;
     private UUID accountId;
     private LedgerEntryType entryType;

@@ -3,13 +3,25 @@ package com.vaultpay.domain.model;
 import com.vaultpay.domain.enums.AccountStatus;
 import com.vaultpay.domain.enums.AccountType;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
+@Entity
+@Table(name = "accounts")
 public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private UUID id;
+    
     private String accountNumber;
     private String agency;
     private AccountType accountType;

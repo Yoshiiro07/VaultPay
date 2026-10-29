@@ -40,7 +40,7 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
-        String token = tokenService.generateToken(customer.getId(), customer.getEmail());
+        String token = tokenService.generateToken(customer.getcustomer_id(), customer.getEmail());
         return ResponseEntity.ok(LoginResponseDto.bearer(token, 86400));
     }
 
